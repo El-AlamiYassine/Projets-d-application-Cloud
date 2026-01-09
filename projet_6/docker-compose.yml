@@ -1,0 +1,43 @@
+services:
+  jade-main:
+    build: .
+    container_name: jade-main-container
+    ports:
+      - "1099:1099"
+      - "7778:7778"
+    environment:
+      - JADE_MAIN=true
+    networks:
+      - jade-network
+    volumes:
+      - ./logs:/usr/src/app/logs
+    restart: unless-stopped
+    command: ["java", "-cp", "./lib/jade.jar:./", "Main"]
+
+  coordinator-agent:
+    build: .
+    environment:
+      - JADE_MAIN=false
+      - JADE_HOST=jade-main-container
+    depends_on:
+      - jade-main
+    networks:
+      - jade-network
+    restart: unless-stopped
+    # This service can be scaled using: docker-compose up --scale coordinator-agent=3
+
+  resource-agent:
+    build: .
+    environment:
+      - JADE_MAIN=false
+      - JADE_HOST=jade-main-container
+    depends_on:
+      - jade-main
+    networks:
+      - jade-network
+    restart: unless-stopped
+    # This service can be scaled using: docker-compose up --scale resource-agent=3
+
+networks:
+  jade-network:
+    driver: bridge

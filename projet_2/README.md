@@ -27,7 +27,13 @@ CREATE DATABASE studentdb;
 
 3. Update the database credentials in `src/main/resources/application.properties` if needed:
    - `spring.datasource.username` (default: postgres)
-   - `spring.datasource.password` (default: password)
+   - `spring.datasource.password` (default: yassin1)
+
+Alternatively, you can run the provided SQL setup script `setup_postgres.sql` to initialize the database:
+
+```bash
+psql -U postgres -f setup_postgres.sql
+```
 
 ## How to Run
 
@@ -48,6 +54,19 @@ java -jar target/student-api-0.0.1-SNAPSHOT.jar
 ```
 
 The API will be available at `http://localhost:8080`
+
+## Docker Deployment
+
+The application can also be deployed using Docker and Docker Compose:
+
+1. Make sure you have Docker and Docker Compose installed
+2. From the project directory, run:
+
+```bash
+docker-compose up --build
+```
+
+This will start both the application and PostgreSQL database in containers. The database will be available on port 5432 and the API on port 8080.
 
 ## Example Requests
 
