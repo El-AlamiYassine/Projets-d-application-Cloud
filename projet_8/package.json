@@ -1,0 +1,18 @@
+{
+  "name": "hello-world-new",
+  "version": "1.0.0",
+  "description": "A simple Node.js Hello World application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "generate-image": "node generate-image.js"
+  },
+  "keywords": [
+    "node",
+    "hello",
+    "world"
+  ],
+  "author": "User",
+  "license": "ISC",
+  "type": "commonjs"
+}
